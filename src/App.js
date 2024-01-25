@@ -1,23 +1,46 @@
-import logo from './logo.svg';
+/* eslint-disable jsx-a11y/alt-text */
+import { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios';
+
+const options = {
+  method: 'POST',
+  url: 'https://youtube-scraper-2023.p.rapidapi.com/related_videos',
+  headers: {
+    'content-type': 'application/json',
+    'X-RapidAPI-Key': '87b93ad1bemshde292e3554a25dfp1f5e5ejsn73b7a78f7e8e',
+    'X-RapidAPI-Host': 'youtube-scraper-2023.p.rapidapi.com'
+  },
+  data: {
+    videoId: '48h57PspBec',
+    nextToken: ''
+  }
+};
 
 function App() {
+  const [data, setData]=useState([]);
+  const getData = async () => {
+    try {
+      const response = await axios.request(options);
+      setData(response.data.videos)
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={getData}>Get Data</button>
+      {
+        data.map(vid=>(
+          <div>
+            <img src={vid.thumbnails[1].url} /><br />
+            <a href={vid.url}>{vid.title}</a>
+            <p>{vid.lengthText} - {vid.shortViewCountText} - {vid.publishedTimeText}</p>
+            <br />
+            <br />
+          </div>
+        ))
+      }
     </div>
   );
 }
