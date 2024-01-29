@@ -1,0 +1,19 @@
+.home-page{
+    .home-sections{
+        display: flex;
+        .home-content{
+            width: calc(100% - 220px);
+            max-height: calc(100vh - 107px);
+            overflow-y: auto;
+            border-right: 1px solid #ffffff33;
+            margin: 12px 0;
+            padding: 12px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            grid-gap: 25px 15px;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+}

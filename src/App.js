@@ -18,8 +18,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/search" element={<Search />} />
-            <Route path="/channel" element={<Channel />} />
             <Route path="/video" element={<Video />} />
+            <Route path="/channel" element={<Channel />} />
             <Route path="/shorts" element={<Shorts />} />
           </Routes>
       </BrowserRouter>
