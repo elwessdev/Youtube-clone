@@ -1,0 +1,50 @@
+.search-bar{
+    color: #FFF;
+    width: 100%;
+    overflow: hidden;
+    .logo{
+        float: left;
+        padding: 9px 0;
+        svg{
+            width: 115px;
+            height: 25px;
+        }
+    } 
+    .search-box{
+        float: right;
+        border: 1px solid #303030;
+        border-radius: 30px;
+        height: 43px;
+        width: fit-content;
+        overflow: hidden;
+        display: flex;
+        input{
+            width: 500px;
+            background: none;
+            color: #FFF;
+            height: 100%;
+            outline: none;
+            text-indent: 20px;
+            font-size: 16px;
+            &::placeholder{
+                color: #aaa;
+            }
+        }
+        button{
+            width: 64px;
+            display: flex;
+            justify-content: center;
+            background-color: #ffffff14;
+            align-items: center;
+            border-left: 1px solid #303030;
+            &:hover svg{
+                color: #FF0000;
+            }
+            svg{
+                width: 24px;
+                transition: all .2s;
+                height: 24px;
+            }
+        }
+    }
+}

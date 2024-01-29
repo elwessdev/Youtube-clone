@@ -1,0 +1,39 @@
+.side-bar{
+    width: 220px;
+    max-height: calc(100vh - 107px);
+    border-right: 1px solid #ffffff33;
+    margin: 12px 0;
+    padding: 12px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    a{
+        color: #FFF;
+        font-size: 16px;
+        display: flex;
+        padding: 9px 10px;
+        border-radius: 10px;
+        transition: all .2s;
+        &:not(:last-of-type){
+            margin-bottom: 6px;
+        }
+        &:hover{
+            background-color: #aaaaaa45;
+        }
+        &.active{
+            background-color: #aaaaaa45;
+            svg{
+                fill: #F00;
+            }
+        }
+        svg{
+            fill: #FFF;
+            width: 26px;
+            height: 26px;
+            margin-right: 24px;
+            position: relative;
+            top: -2px;
+        }
+    }
+}

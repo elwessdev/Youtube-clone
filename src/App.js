@@ -1,46 +1,28 @@
-/* eslint-disable jsx-a11y/alt-text */
-import { useEffect, useState } from 'react';
-import './App.css';
-import axios from 'axios';
+import React from "react";
+import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 
-const options = {
-  method: 'POST',
-  url: 'https://youtube-scraper-2023.p.rapidapi.com/related_videos',
-  headers: {
-    'content-type': 'application/json',
-    'X-RapidAPI-Key': '87b93ad1bemshde292e3554a25dfp1f5e5ejsn73b7a78f7e8e',
-    'X-RapidAPI-Host': 'youtube-scraper-2023.p.rapidapi.com'
-  },
-  data: {
-    videoId: '48h57PspBec',
-    nextToken: ''
-  }
-};
+// Components
+import Api from "./api";
+import Home from "./Home";
+import Search from "./Search";
+import Channel from "./Channel";
+import Video from "./Video";
+import Shorts from "./Shorts";
 
 function App() {
-  const [data, setData]=useState([]);
-  const getData = async () => {
-    try {
-      const response = await axios.request(options);
-      setData(response.data.videos)
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  
   return (
     <div className="App">
-      <button onClick={getData}>Get Data</button>
-      {
-        data.map(vid=>(
-          <div>
-            <img src={vid.thumbnails[1].url} /><br />
-            <a href={vid.url}>{vid.title}</a>
-            <p>{vid.lengthText} - {vid.shortViewCountText} - {vid.publishedTimeText}</p>
-            <br />
-            <br />
-          </div>
-        ))
-      }
+      {/* <Api /> */}
+      <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/channel" element={<Channel />} />
+            <Route path="/video" element={<Video />} />
+            <Route path="/shorts" element={<Shorts />} />
+          </Routes>
+      </BrowserRouter>
     </div>
   );
 }
