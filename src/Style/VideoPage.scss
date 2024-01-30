@@ -5,13 +5,13 @@
         padding: 12px 15px 0;
         height: calc(100vh - 83px);
         .video-player{
-            width: calc(100% - 390px);
+            width: calc(100% - 480px);
             padding-right: 20px;
             height: 1;
             iframe{
                 width: 100%;
                 border-radius: 10px;
-                height: 600px;
+                height: 457px !important;
             }
             .video-infos{
                 margin-top: 16px;
@@ -62,7 +62,7 @@
             }
         }
         .vids-recommended{
-            width: 390px;
+            width: 480px;
             max-height: calc(100vh - 107px);
             overflow-y: auto;
             &::-webkit-scrollbar {

@@ -1,23 +1,24 @@
 import React from 'react';
+import {Link} from "react-router-dom";
 
-export default function VideoShow(){
+export default function VideoShow({title,channelName,channelImg,thum,movingThumbnails,views,date,VideoId,ChannelId}){
     return(
-        <a href='#' className='video-show'>
+        <Link to={"/video/"+VideoId} href='#' className='video-show'>
             <div className='thumbnail'>
-                <img src='https://i.ytimg.com/vi/UxgGrO9GBvY/hq720.jpg?sqp=-oaymwEcCNAFEJQDSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLADPs0RSslMfEQ6laHCssXTc4lAtA' />
+                <img src={thum} alt={title} />
                 <p className='video-duration'>16:42</p>
             </div>
             <div className='video-details'>
-                <img className='channel-img' src='https://yt3.ggpht.com/UvdWU0jg21It27_ralQRa_Jg7VRQGTcmiG_uYukoORqdGigrQZrIqiD9xZyZKDL90Lavy67olA=s68-c-k-c0x00ffffff-no-rj'></img>
+                <img className='channel-img' src={channelImg} alt={channelName} />
                 <div className='vid-txt'>
-                    <h3>Should You Leave Your Team Or Stay?</h3>
-                    <a href='#'>A Life Engineered</a>
+                    <h3>{title}</h3>
+                    <Link to={"/channel/"+ChannelId}>{channelName}</Link>
                     <div className='vid-txt-nums'>
-                        <span>7.1K views</span>
-                        <span>3 days ago</span>
+                        <span>{views}K views</span>
+                        <span>{date}</span>
                     </div>
                 </div>
             </div>
-        </a>
+        </Link>
     )
 };
