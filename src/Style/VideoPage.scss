@@ -11,14 +11,16 @@
             iframe{
                 width: 100%;
                 border-radius: 10px;
-                height: 560px !important;
+                height: calc(100% - 170px) !important;
             }
             .video-infos{
-                margin-top: 16px;
+                height: 170px;
+                padding-top: 20px;
                 h2{
                     color: #f1f1f1;
-                    font-size: 25px;
-                    margin-bottom: 15px;
+                    font-size: 22px;
+                    margin-bottom: 20px;
+                    font-weight: 500;
                 }
                 .vid-btm{
                     overflow: hidden;

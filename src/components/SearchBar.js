@@ -10,6 +10,7 @@ import SearchAutoComplete from "./SearchAutoComplete";
 export default function SearchBar(){
     const [searchValue, setSearchValue]=useState("");
     const [searchResults, setRearchResults]=useState([]);
+    const [hidePop, setHidePop]=useState(true);
     const options = {
         method: 'GET',
         url: 'https://youtube138.p.rapidapi.com/auto-complete/',
@@ -56,9 +57,9 @@ export default function SearchBar(){
                         <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
                     </svg>
                 </Link>
-                {(searchValue.length>0&&searchResults.length>0) && (
+                {(searchValue.length>3&&searchResults.length>0&&hidePop) && (
                     <div className='search-auto-complete'>
-                        {searchResults.map(result=>(<SearchAutoComplete value={result}  />))}
+                        {searchResults.map(result=>(<SearchAutoComplete value={result} hidePope={setHidePop}  />))}
                     </div>
                 )}
             </div>
