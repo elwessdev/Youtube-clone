@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter, Router, Routes, Route } from "react-router-dom";
 
 // Components
-import Api from "./api";
 import Home from "./Home";
 import Search from "./Search";
 import Channel from "./Channel";

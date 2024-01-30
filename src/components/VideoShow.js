@@ -1,15 +1,15 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-export default function VideoShow({title,channelName,channelImg,thum,movingThumbnails,views,date,VideoId,ChannelId}){
+export default function VideoShow({title,channelName,channelThum,videoThum,vidLength,views,date,VideoId,ChannelId}){
     return(
         <Link to={"/video/"+VideoId} href='#' className='video-show'>
             <div className='thumbnail'>
-                <img src={thum} alt={title} />
-                <p className='video-duration'>16:42</p>
+                <img src={videoThum} alt={title} />
+                <p className='video-duration'>{vidLength}</p>
             </div>
             <div className='video-details'>
-                <img className='channel-img' src={channelImg} alt={channelName} />
+                <img className='channel-img' src={channelThum} alt={channelName} />
                 <div className='vid-txt'>
                     <h3>{title}</h3>
                     <Link to={"/channel/"+ChannelId}>{channelName}</Link>

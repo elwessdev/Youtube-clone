@@ -1,49 +1,110 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import {APIKEY} from "../api"
+import {SideContext} from "../Home";
 
 // Components
 import VideoShow from "./VideoShow";
 
 
-export default function HomeContent(){
+export default function HomeContent({page}){
     const [vids, setVids]=useState([]);
-    // API
+    const [trendVidsList, setTrendVidsList]=useState([]);
+    // const {SidePage} = useContext(SideContext);
+    console.log(page)
+    // API Home Videos
     const options = {
         method: 'GET',
-        url: 'https://youtube138.p.rapidapi.com/home/',
-        params: {hl: 'en', gl: 'US',cursor: '',},
+        url: 'https://youtube-v3-alternative.p.rapidapi.com/search',
+        params: {
+            query: page,
+            geo: 'TN',
+            lang: 'en'
+        },
         headers: {
-            'X-RapidAPI-Key': APIKEY,
-            'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
+            'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+            'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
         }
     };
-    const getVids = async() =>{
+    const getHomeVids = async() =>{
         try{
             const resp = await axios.request(options);
-            // console.log(resp.data.contents[0].video.publishedTimeText)
-            setVids(resp.data.contents);
+            setVids(resp.data.data);
+            console.log(resp.data.data);
+        } catch(error){
+            console.log(error)
+        }
+    }
+    // API Trading
+    const trendVids = {
+        method: 'GET',
+        url: 'https://youtube138.p.rapidapi.com/trending',
+        params: {
+            geo: 'TN',
+            lang: 'en'
+        },
+        headers: {
+            'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+            'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
+        }
+    };
+    const getTrendVids = async() =>{
+        try{
+            const resp = await axios.request(trendVids);
+            setTrendVidsList(resp.data.data);
+            console.log(resp.data.data);
         } catch(error){
             console.log(error)
         }
     }
     useEffect(()=>{
-        getVids();
-    },[])
+        if(page==="trending"){
+            getTrendVids();
+        } else {
+            getHomeVids();
+        }
+    },[page])
     return(
         <div className='home-content'>
-            {vids.map(vid=>(<VideoShow
-                            title={vid?.video.title}
-                            channelName={vid?.video.author.title}
-                            channelImg={vid?.video.author.avatar[0].url}
-                            thum={vid?.video.thumbnails[0].url}
-                            // movingThumbnails={vid?.video.movingThumbnails[0].url}
-                            views={vid?.video.stats.views}
-                            date={vid?.video.publishedTimeText}
-                            VideoId={vid?.video.videoId}
-                            ChannelId={vid?.video.author.channelId}
-                        />
-            ))}
+            {page!=="all"&&(
+                <h1 className='titlePage'><span>{page}</span> videos</h1>
+            )}
+            {page!=="trending"&&(
+                <div className='videosList'>
+                    {vids?.map(vid=>{
+                        if(vid?.type!=="channel"){
+                            return <VideoShow
+                                title={vid?.title}
+                                channelName={vid?.channelTitle}
+                                channelThum={vid?.channelThumbnail[0].url}
+                                videoThum={vid?.thumbnail[0].url}
+                                views={vid?.viewCount}
+                                date={vid?.publishedText}
+                                VideoId={vid?.videoId}
+                                ChannelId={vid?.channelId}
+                                vidLength={vid?.lengthText}
+                            />
+                        }
+                    })}
+                </div>
+            )}
+            {page==="trending"&&(
+                <div className='videosList'>
+                    {
+                        trendVidsList?.map(vid=>(
+                            <VideoShow
+                                title={vid?.title}
+                                channelName={vid?.channelTitle}
+                                channelThum={vid?.channelThumbnail[0].url}
+                                videoThum={vid?.thumbnail[0].url}
+                                views={vid?.viewCount}
+                                date={vid?.publishedText}
+                                VideoId={vid?.videoId}
+                                ChannelId={vid?.channelId}
+                                vidLength={vid?.lengthText}
+                            />
+                    ))}
+                </div>
+            )}
         </div>
     )
 };

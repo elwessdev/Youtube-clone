@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import {APIKEY} from "../api"
 
 // Components
 import VideoShow from "./VideoShow";
@@ -11,22 +10,22 @@ export default function SearchContent({searchTxtQQ}){
     // API
     const options = {
         method: 'GET',
-        url: 'https://youtube138.p.rapidapi.com/search/',
+        url: 'https://youtube-v3-alternative.p.rapidapi.com/search',
         params: {
-            q: searchTxtQQ,
-            hl: 'en',
-            gl: 'US'
+            query: searchTxtQQ,
+            geo: 'TN',
+            lang: ''
         },
         headers: {
-            'X-RapidAPI-Key': APIKEY,
-            'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
+            'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+            'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
         }
     };
     const getVideo = async() =>{
         try{
             const resp = await axios.request(options);
-            setVideosList(resp.data.contents);
-            console.log(resp.data.contents)
+            setVideosList(resp.data.data);
+            console.log(resp.data.data)
         } catch(error){
             console.log(error)
         }
@@ -43,10 +42,10 @@ export default function SearchContent({searchTxtQQ}){
                     videosList.map(vid=>{
                         if(vid.type==="channel"){
                             return <ChannelProfileShow 
-                                    channelID={vid?.channel.channelId}
-                                    channelPic={vid?.channel.avatar[0].url}
-                                    channelName={vid?.channel.title}
-                                    channelSubs={vid?.channel.stats.subscribersText} 
+                                    channelID={vid?.channelId}
+                                    channelPic={vid?.thumbnail[0].url}
+                                    channelName={vid?.title}
+                                    channelSubs={vid?.subscriberCount} 
                                     />
                                 }
                     })
@@ -57,15 +56,15 @@ export default function SearchContent({searchTxtQQ}){
                     videosList.map(vid=>{
                         if(vid.type==="video"){
                             return <VideoShow
-                                    title={vid?.video.title}
-                                    channelName={vid?.video.author.title}
-                                    channelImg={vid?.video.author.avatar[0].url}
-                                    thum={vid?.video.thumbnails[0].url}
-                                    // movingThumbnails={vid?.video.movingThumbnails[0].url}
-                                    views={vid?.video.stats.views}
-                                    date={vid?.video.publishedTimeText}
-                                    VideoId={vid?.video.videoId}
-                                    ChannelId={vid?.video.author.channelId}
+                                    title={vid?.title}
+                                    channelName={vid?.channelTitle}
+                                    channelThum={vid?.channelThumbnail[0].url}
+                                    videoThum={vid?.thumbnail[0].url}
+                                    views={vid?.viewCount}
+                                    date={vid?.publishedText}
+                                    VideoId={vid?.videoId}
+                                    ChannelId={vid?.channelId}
+                                    vidLength={vid?.lengthText}
                                 />
                         }
                     })

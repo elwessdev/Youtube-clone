@@ -11,7 +11,7 @@
             iframe{
                 width: 100%;
                 border-radius: 10px;
-                height: 457px !important;
+                height: 560px !important;
             }
             .video-infos{
                 margin-top: 16px;
@@ -74,10 +74,26 @@
                 &:not(:first-of-type){
                     margin-top: 15px;
                 }
-                img{
-                    width: 168px;
-                    height: 94px;
-                    border-radius: 7px;
+                .vid-thum{
+                    width: 215px;
+                    position: relative;
+                    img{
+                        width: 168px;
+                        height: 94px;
+                        border-radius: 7px;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    p{
+                        position: absolute;
+                        right: 4px;
+                        bottom: 4px;
+                        background-color: rgb(0 0 0 / 90%);
+                        color: #FFF;
+                        font-size: 12px;
+                        border-radius: 4px;
+                        padding: 1px 6px;
+                    }
                 }
                 .vid-txt{
                     width: calc(100% - 36px);

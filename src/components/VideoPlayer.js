@@ -17,7 +17,7 @@ export default function VideoPlayer({url,title,likes,views,channelName,channelSu
                     </Link>
                     <div className='vid-cnt'>
                         <span>{views} views</span>
-                        <span>{likes} likes</span>
+                        {/* <span>{likes} likes</span> */}
                     </div>
                 </div>
             </div>

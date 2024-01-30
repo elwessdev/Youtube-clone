@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import axios from 'axios';
-import {APIKEY} from "../api"
 
 // Components
 import SearchAutoComplete from "./SearchAutoComplete";
@@ -16,7 +15,7 @@ export default function SearchBar(){
         url: 'https://youtube138.p.rapidapi.com/auto-complete/',
         params: {hl: 'en', gl: 'US', q: searchValue},
         headers: {
-            'X-RapidAPI-Key': APIKEY,
+            'X-RapidAPI-Key': '4fc06a7021msh6cf3288f3aaa3d3p13eb0bjsn5983187488d0',
             'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
         }
     };
@@ -52,11 +51,11 @@ export default function SearchBar(){
             </Link>
             <div className='search-box'>
                 <input type='text' placeholder='Search' onChange={e=>setSearchValue(e.target.value)} onKeyUp={searchHandle} value={searchValue} />
-                <button>
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-                </svg>
-                </button>
+                <Link to={`/search/${searchValue}`}>
+                    <svg className="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <path stroke="currentColor" strokeLinecap="round" strokeWidth="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
+                    </svg>
+                </Link>
                 {(searchValue.length>0&&searchResults.length>0) && (
                     <div className='search-auto-complete'>
                         {searchResults.map(result=>(<SearchAutoComplete value={result}  />))}

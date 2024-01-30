@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import axios from "axios";
 import {Link} from "react-router-dom";
-import {APIKEY} from "../api"
 
 export default function VideoRecommended({vidIdPass}){
     const [videosList, setVideosList]=useState([]);
@@ -9,42 +8,45 @@ export default function VideoRecommended({vidIdPass}){
     // API
     const options = {
         method: 'GET',
-        url: 'https://youtube138.p.rapidapi.com/video/related-contents/',
+        url: 'https://youtube-v3-alternative.p.rapidapi.com/related',
         params: {
             id: vidIdPass,
-            hl: 'en',
-            gl: 'US'
+            geo: 'TN',
+            lang: ''
         },
         headers: {
-            'X-RapidAPI-Key': APIKEY,
-            'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
+            'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
+            'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
         }
     };
     const getVideos = async() =>{
         try{
             const resp = await axios.request(options);
-            setVideosList(resp.data.contents);
+            setVideosList(resp.data.data);
             console.log("Vid Rec");
-            console.log(resp.data.contents);
+            console.log(resp.data.data);
         } catch(error){
             console.log(error)
         }
     }
     useEffect(()=>{
         getVideos();
-    })
+    },[vidIdPass])
     return(
         <div className='vids-recommended'>
             {
                 videosList.map(vid=>(
-                    <Link to={`/video/${vid.video.videoId}`} className='vid-rec'>
-                        <img src={vid?.video.thumbnails[0].url} alt={vid?.video.title} />
+                    <Link to={`/video/${vid.videoId}`} className='vid-rec'>
+                        <div className='vid-thum'>
+                            <img src={vid?.thumbnail[1].url} alt={vid?.title} />
+                            <p>{vid?.lengthText}</p>
+                        </div>
                         <div className='vid-txt'>
-                            <h3>{vid?.video.title}</h3>
-                            <a>{vid?.video.author.title}</a>
+                            <h3>{vid?.title}</h3>
+                            <Link to={`/channel/${vid?.channelId}`}>{vid?.channelTitle}</Link>
                             <div className='vid-txt-nums'>
-                                <span>{vid?.video.stats.views} views</span>
-                                <span>{vid?.videopublishedTimeText}</span>
+                                <span>{vid?.viewCount} views</span>
+                                <span>{vid?.publishedTimeText}</span>
                             </div>
                         </div>
                     </Link>

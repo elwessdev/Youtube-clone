@@ -1,7 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import {APIKEY} from "./api"
 
 // Components
 import SearchBar from "./components/SearchBar";
@@ -24,7 +23,7 @@ export default function Video(){
             gl: 'US'
         },
         headers: {
-            'X-RapidAPI-Key': APIKEY,
+            'X-RapidAPI-Key': '4fc06a7021msh6cf3288f3aaa3d3p13eb0bjsn5983187488d0',
             'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
         }
     };
@@ -39,7 +38,8 @@ export default function Video(){
     }
     useEffect(()=>{
         getVideo();
-    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [videoIdRP])
     return(
         <div className='video-page'>
             <SearchBar />
