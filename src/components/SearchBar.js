@@ -23,8 +23,8 @@ export default function SearchBar(){
     const searchHandle = async() =>{
         try{
             const resp = await axios.request(options);
-            console.log(resp.data.results)
             setRearchResults(resp.data.results);
+            console.log(resp.data.results);
         } catch(error){
             console.log(error)
         }

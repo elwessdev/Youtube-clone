@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from "react-router-dom";
 
 export default function VideoShow({title,channelName,channelThum,videoThum,vidLength,views,date,VideoId,ChannelId}){
+    // console.log(verifyChannel)
     return(
         <Link to={"/video/"+VideoId} href='#' className='video-show'>
             <div className='thumbnail'>

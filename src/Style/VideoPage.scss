@@ -40,6 +40,15 @@
                             top: 1px;
                             p{
                                 font-weight: bold;
+                                display: flex;
+                                svg{
+                                    fill: #aaa;
+                                    width: 18px;
+                                    height: 18px;
+                                    position: relative;
+                                    top: 5px;
+                                    margin-left: 5px;
+                                }
                             }
                             span{
                                 color: #aaa;

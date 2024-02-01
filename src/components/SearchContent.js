@@ -1,37 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { fetchData } from "../utils/fetchData";
 
 // Components
 import VideoShow from "./VideoShow";
 import ChannelProfileShow from "./ChannelProfileShow";
-
 export default function SearchContent({searchTxtQQ}){
     const [videosList, setVideosList]=useState([]);
-    // API
-    const options = {
-        method: 'GET',
-        url: 'https://youtube-v3-alternative.p.rapidapi.com/search',
-        params: {
-            query: searchTxtQQ,
-            geo: 'TN',
-            lang: ''
-        },
-        headers: {
-            'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
-            'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
-        }
-    };
-    const getVideo = async() =>{
-        try{
-            const resp = await axios.request(options);
-            setVideosList(resp.data.data);
-            console.log(resp.data.data)
-        } catch(error){
-            console.log(error)
-        }
-    }
     useEffect(()=>{
-        getVideo();
+        fetchData(`search?geo=TN&lang=en&query=${searchTxtQQ}`).then(data=>setVideosList(data.data));
     },[searchTxtQQ])
     return(
         <div className='search-content'>

@@ -1,41 +1,17 @@
 import React, { useState,useEffect } from 'react';
-import axios from "axios";
 import {Link} from "react-router-dom";
+import { fetchData } from "../utils/fetchData";
 
 export default function VideoRecommended({vidIdPass}){
-    const [videosList, setVideosList]=useState([]);
-    console.log("recom");
-    // API
-    const options = {
-        method: 'GET',
-        url: 'https://youtube-v3-alternative.p.rapidapi.com/related',
-        params: {
-            id: vidIdPass,
-            geo: 'TN',
-            lang: ''
-        },
-        headers: {
-            'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
-            'X-RapidAPI-Host': 'youtube-v3-alternative.p.rapidapi.com'
-        }
-    };
-    const getVideos = async() =>{
-        try{
-            const resp = await axios.request(options);
-            setVideosList(resp.data.data);
-            console.log("Vid Rec");
-            console.log(resp.data.data);
-        } catch(error){
-            console.log(error)
-        }
-    }
+    const [relatedVideos, setRelatedVideos]=useState([]);
     useEffect(()=>{
-        getVideos();
+        // API
+        fetchData(`related?geo=TN&lang=en&id=${vidIdPass}`).then(data=>setRelatedVideos(data.data));
     },[vidIdPass])
     return(
         <div className='vids-recommended'>
             {
-                videosList.map(vid=>(
+                relatedVideos.map(vid=>(
                     <Link to={`/video/${vid.videoId}`} className='vid-rec'>
                         <div className='vid-thum'>
                             <img src={vid?.thumbnail[1].url} alt={vid?.title} />
