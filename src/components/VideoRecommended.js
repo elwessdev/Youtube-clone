@@ -6,7 +6,7 @@ export default function VideoRecommended({vidIdPass}){
     const [relatedVideos, setRelatedVideos]=useState([]);
     useEffect(()=>{
         // API
-        fetchData(`related?geo=TN&lang=en&id=${vidIdPass}`).then(data=>setRelatedVideos(data.data));
+        fetchData(`related?id=${vidIdPass}`).then(data=>setRelatedVideos(data.data));
     },[vidIdPass])
     return(
         <div className='vids-recommended'>

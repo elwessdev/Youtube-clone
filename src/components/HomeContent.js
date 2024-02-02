@@ -14,7 +14,7 @@ export default function HomeContent({page}){
         if(page==="trending"){
             fetchData(`trending`).then(data=>setTrendVidsList(data.data));
         } else {
-            fetchData(`search?geo=TN&lang=en&query=${page}`).then(data=>setVids(data.data)).catch(err=>console.log(err));
+            fetchData(`search?query=${page}`).then(data=>setVids(data.data)).catch(err=>console.log(err));
         }
     },[page])
     return(

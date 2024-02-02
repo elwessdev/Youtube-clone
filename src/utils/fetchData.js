@@ -4,6 +4,8 @@ export const API_URL = 'https://youtube-v3-alternative.p.rapidapi.com';
 const options = {
     params: {
         maxResults: 50,
+        geo:"TN",
+        lang:"en"
     },
     headers: {
         'X-RapidAPI-Key': process.env.REACT_APP_APIKEY,
