@@ -2,9 +2,9 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 
 // Components
-import SideBar from "./components/SideBar";
+// import SideBar from "./components/SideBar";
 import SearchBar from "./components/SearchBar";
-import SearchContent from "./components/SearchContent";
+import SearchContent from "./components/Search/SearchContent";
 
 export default function Search(){
     const params = useParams();

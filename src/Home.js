@@ -1,9 +1,9 @@
 import React, { createContext, useState } from 'react';
 
 // Components
-import SideBar from "./components/SideBar";
+import SideBar from "./components/Home/SideBar";
 import SearchBar from "./components/SearchBar";
-import HomeContent from "./components/HomeContent";
+import HomeContent from "./components/Home/HomeContent";
 
 export const SideContext = createContext();
 export default function Home(){

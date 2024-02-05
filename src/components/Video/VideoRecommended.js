@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from 'react';
 import {Link} from "react-router-dom";
-import { fetchData } from "../utils/fetchData";
+import { fetchData } from "../../utils/fetchData";
 
 export default function VideoRecommended({vidIdPass}){
     const [relatedVideos, setRelatedVideos]=useState([]);

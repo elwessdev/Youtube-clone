@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 // Components
-import SearchAutoComplete from "./SearchAutoComplete";
+import SearchAutoComplete from "./Search/SearchAutoComplete";
 
 
 
@@ -16,7 +16,7 @@ export default function SearchBar(){
         url: 'https://youtube138.p.rapidapi.com/auto-complete/',
         params: {hl: 'en', gl: 'US', q: searchValue},
         headers: {
-            'X-RapidAPI-Key':"e", //'d6b90ba949msh1b632d2b88ff181p1b5fd1jsn244301737341',
+            'X-RapidAPI-Key':'c8f7f98ebamsh3f22109b4e348eap14dcd3jsndb416cd74d99',
             'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
         }
     };

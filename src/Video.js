@@ -6,8 +6,8 @@ import { useParams } from 'react-router-dom';
 import SearchBar from "./components/SearchBar";
 // import VideoRecommended from "./components/VideoRecommended";
 // import VideoPlayer from "./components/VideoPlayer";
-const LazyVideoPlayer = React.lazy(()=>import("./components/VideoPlayer"));
-const LazyVideoRecommended = React.lazy(()=>import("./components/VideoRecommended"));
+const LazyVideoPlayer = React.lazy(()=>import("./components/Video/VideoPlayer"));
+const LazyVideoRecommended = React.lazy(()=>import("./components/Video/VideoRecommended"));
 
 export default function Video(){
     const [videoDetails, setVideoDetails]=useState();
@@ -24,7 +24,7 @@ export default function Video(){
             gl: 'US'
         },
         headers: {
-            'X-RapidAPI-Key': 'd6b90ba949msh1b632d2b88ff181p1b5fd1jsn244301737341',
+            'X-RapidAPI-Key': 'c8f7f98ebamsh3f22109b4e348eap14dcd3jsndb416cd74d99',
             'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
         }
     };

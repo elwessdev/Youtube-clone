@@ -1,67 +1,93 @@
 import React, { useEffect, useState, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchData } from "./utils/fetchData";
+// import { fetchData } from "./utils/fetchData";
+import axios from "axios";
+import TopSection from "./components/Channel/TopSection";
 
 // Components
 import SearchBar from "./components/SearchBar";
-// import VideoChannelShow from "./components/VideoChannelShow";
-const LazyVideoChannelShow = React.lazy(()=>import("./components/VideoChannelShow"));
+const LazyVideoChannelShow = React.lazy(()=>import("./components/Channel/VideoChannelShow"));
+const LazyShortsChannelShow = React.lazy(()=>import("./components/Channel/ShortsChannelShow"));
+const LazyAboutChannelShow = React.lazy(()=>import("./components/Channel/AboutChannelShow"));
+const LazyTopSection = React.lazy(()=>import("./components/Channel/TopSection"));
+
 
 export default function Channel(){
     const params = useParams();
     const channelId = params.channelId;
-    console.log("channel id:",channelId);
-    const [channelDetails, setChannelDetails]=useState();
+
+
     const [channelVids, setChannelVids]=useState([]);
-    
+    const [channelShorts, setChannelShorts]=useState([]);
+    const [channelDetails, setChannelDetails]=useState();
+    const [pageState, setPageState]=useState("videos");
+
+    const options = {
+        method: 'GET',
+        url: `https://youtube-v2.p.rapidapi.com/channel/${pageState}`,
+        params: {channel_id: channelId},
+        headers: {
+            'X-RapidAPI-Key': '04b6b0772dmshae4740c9ae2ed0ep1252a1jsn7423468181f9',
+            'X-RapidAPI-Host': 'youtube-v2.p.rapidapi.com'
+        }
+    };
+    const getData = async () => {
+        try {
+            const resp = await axios.request(options);
+            if(pageState==="videos"){
+                setChannelVids(resp.data.videos);
+                console.log(resp.data.videos);
+            } else if(pageState==="shorts"){
+                setChannelShorts(resp.data.videos);
+                console.log(resp.data.videos);
+            } else if(pageState==="details") {
+                setChannelDetails(resp.data);
+                console.log(resp.data);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
     useEffect(()=>{
-        // API Get Channel Details
-        fetchData(`channel?id=${channelId}`).then(data=>{
-            setChannelDetails(data.meta);
-            setChannelVids(data.data);
-            console.log(data.meta)
-        });
-    },[channelId])
+        getData();
+    },[channelId,pageState])
     return(
         <div className='channel-page'>
             <SearchBar />
             <div className='channel-page-content'>
-                <div className='top-part'>
-                    <img className='cover' src={channelDetails?.image.banner[2].url} alt='' />
-                    <div className='channel-profile'>
-                        <img src={channelDetails?.thumbnail[2].url} alt={channelDetails?.title} />
-                        <h3>
-                            {channelDetails?.title}
-                            {(channelDetails?.subscriberCount.slice(-1) === "K" || channelDetails?.subscriberCount.slice(-1) === "M") &&(
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24" focusable="false"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zM9.8 17.3l-4.2-4.1L7 11.8l2.8 2.7L17 7.4l1.4 1.4-8.6 8.5z"></path></svg>
-                            )}
-                        </h3>
-                        <p>{channelDetails?.subscriberCount} subscribers</p>
-                        {/* <p>{channelDetails?.description}</p> */}
-                    </div>
-                </div>
+                {/* <Suspense fallback="Loading...">
+                    <LazyTopSection chanID={channelId} />
+                </Suspense> */}
+                <TopSection chanID={channelId} />
                 <div className='cat-switch'>
-                    <a>Videos</a>
-                    <a>Shorts</a>
-                    <a>About</a>
+                    <ul className='links'>
+                        <li onClick={e=>setPageState("videos")} className={pageState==="videos" ?"active" :""}>Videos</li>
+                        <li onClick={e=>setPageState("shorts")} className={pageState==="shorts" ?"active" :""}>Shorts</li>
+                        <li onClick={e=>setPageState("details")} className={pageState==="details" ?"active" :""}>About</li>
+                    </ul>
                 </div>
-                <div className='vids-part'>
-                {
-                    channelVids.map(vid=>(
-                        <Suspense fallback="Loading...">
-                            <LazyVideoChannelShow
-                                title={vid?.title}
-                                VideoId={vid?.videoId}
-                                videoThum={vid?.thumbnail[2].url}
-                                // richVideoThum={vid?.richThumbnail[0].url}
-                                views={vid?.viewCount}
-                                date={vid?.publishedText}
-                                vidLength={vid?.lengthText}
-                            />
-                        </Suspense>
-                    ))
+                {pageState==="videos" &&
+                    <Suspense fallback="Loading...">
+                        <LazyVideoChannelShow ChnlsVideos={channelVids}/>
+                    </Suspense>
                 }
-                </div>
+                {pageState==="shorts" &&
+                    <>
+                        {channelShorts.length > 0&&(
+                            <Suspense fallback="Loading...">
+                                <LazyShortsChannelShow ChnlsShorts={channelShorts}/>
+                            </Suspense>
+                        )}
+                        {channelShorts.length === 0&&(
+                            <h1 className='short_nothing'>This channel doesn't have shorts</h1>
+                        )}
+                    </>
+                }
+                {pageState==="details" &&
+                    <Suspense fallback="Loading...">
+                        <LazyAboutChannelShow ChnlsAbout={channelDetails} links={channelDetails?.links}/>
+                    </Suspense>
+                }
             </div>
         </div>
     )
