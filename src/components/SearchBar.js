@@ -16,7 +16,7 @@ export default function SearchBar(){
         url: 'https://youtube138.p.rapidapi.com/auto-complete/',
         params: {hl: 'en', gl: 'US', q: searchValue},
         headers: {
-            'X-RapidAPI-Key': '4fc06a7021msh6cf3288f3aaa3d3p13eb0bjsn5983187488d0',
+            'X-RapidAPI-Key':"e", //'d6b90ba949msh1b632d2b88ff181p1b5fd1jsn244301737341',
             'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
         }
     };
