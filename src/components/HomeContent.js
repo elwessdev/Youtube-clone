@@ -1,10 +1,12 @@
 /* eslint-disable array-callback-return */
 import React, { useEffect, useState, Suspense } from 'react';
 import { fetchData } from "../utils/fetchData";
+import Slider from "react-slick";
 
 // Components
 // import VideoShow from "./VideoShow";
 const LazyVideoShow = React.lazy(()=>import("./VideoShow"));
+const LazyShorts = React.lazy(()=>import("./Shorts"));
 
 
 export default function HomeContent({page}){
@@ -15,14 +17,15 @@ export default function HomeContent({page}){
             fetchData(`trending`).then(data=>setTrendVidsList(data.data));
         } else {
             fetchData(`search?query=${page}`).then(data=>setVids(data.data)).catch(err=>console.log(err));
+            console.log(vids)
         }
-    },[page])
+    },[page]);
     return(
         <div className='home-content'>
-            {page!=="all"&&(
+            {(page!=="all"&&page!=="short")&&(
                 <h1 className='titlePage'><span>{page}</span> videos</h1>
             )}
-            {page!=="trending"&&(
+            {(page!=="trending"&&page!=="short")&&(
                 <div className='videosList'>
                     {vids?.map(vid=>{
                         if(vid?.type!=="channel"){
@@ -64,6 +67,25 @@ export default function HomeContent({page}){
                                 />
                             </Suspense>
                     ))}
+                </div>
+            )}
+            {page==="short"&&(
+                <div className='shorts-page'>
+                    {vids?.map(vid=>{
+                        if(vid?.type!=="channel"){
+                            return (
+                                <Suspense>
+                                        <LazyShorts
+                                            title={vid?.title}
+                                            channelThum={vid?.channelThumbnail[0].url}
+                                            views={vid?.viewCount}
+                                            VideoId={vid?.videoId}
+                                            ChannelId={vid?.channelId}
+                                        />
+                                </Suspense>
+                            )
+                        }
+                    })}
                 </div>
             )}
         </div>

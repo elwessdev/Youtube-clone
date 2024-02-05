@@ -40,6 +40,11 @@ export default function Channel(){
                         {/* <p>{channelDetails?.description}</p> */}
                     </div>
                 </div>
+                <div className='cat-switch'>
+                    <a>Videos</a>
+                    <a>Shorts</a>
+                    <a>About</a>
+                </div>
                 <div className='vids-part'>
                 {
                     channelVids.map(vid=>(
