@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom';
 // import { fetchData } from "./utils/fetchData";
 import axios from "axios";
 import TopSection from "./components/Channel/TopSection";
+import ShortsChannelShow from "./components/Channel/ShortsChannelShow"
+import VideoChannelShow from "./components/Channel/VideoChannelShow"
+import AboutChannelShow from "./components/Channel/AboutChannelShow"
+// import { useGetData } from "./components/Channel/useGetData";
 
 // Components
 import SearchBar from "./components/SearchBar";
@@ -36,13 +40,13 @@ export default function Channel(){
             const resp = await axios.request(options);
             if(pageState==="videos"){
                 setChannelVids(resp.data.videos);
-                console.log(resp.data.videos);
+                console.log(pageState, resp.data.videos);
             } else if(pageState==="shorts"){
                 setChannelShorts(resp.data.videos);
-                console.log(resp.data.videos);
+                console.log(pageState, resp.data.videos);
             } else if(pageState==="details") {
                 setChannelDetails(resp.data);
-                console.log(resp.data);
+                console.log(pageState, resp.data);
             }
         } catch (error) {
             console.error(error);
@@ -50,15 +54,15 @@ export default function Channel(){
     }
     useEffect(()=>{
         getData();
-    },[channelId,pageState])
+    },[pageState])
     return(
         <div className='channel-page'>
             <SearchBar />
             <div className='channel-page-content'>
-                {/* <Suspense fallback="Loading...">
+                <Suspense fallback="Loading...">
                     <LazyTopSection chanID={channelId} />
-                </Suspense> */}
-                <TopSection chanID={channelId} />
+                </Suspense>
+                {/* <TopSection chanID={channelId} /> */}
                 <div className='cat-switch'>
                     <ul className='links'>
                         <li onClick={e=>setPageState("videos")} className={pageState==="videos" ?"active" :""}>Videos</li>
@@ -67,16 +71,18 @@ export default function Channel(){
                     </ul>
                 </div>
                 {pageState==="videos" &&
-                    <Suspense fallback="Loading...">
-                        <LazyVideoChannelShow ChnlsVideos={channelVids}/>
-                    </Suspense>
+                    // <Suspense fallback="Loading...">
+                    //     <LazyVideoChannelShow ChnlsVideos={channelVids}/>
+                    // </Suspense>
+                    <VideoChannelShow ChnlsVideos={channelVids}/>
                 }
                 {pageState==="shorts" &&
                     <>
                         {channelShorts.length > 0&&(
-                            <Suspense fallback="Loading...">
-                                <LazyShortsChannelShow ChnlsShorts={channelShorts}/>
-                            </Suspense>
+                            // <Suspense fallback="Loading...">
+                            //     <LazyShortsChannelShow ChnlsShorts={channelShorts}/>
+                            // </Suspense>
+                            <ShortsChannelShow ChnlsShorts={channelShorts}/>
                         )}
                         {channelShorts.length === 0&&(
                             <h1 className='short_nothing'>This channel doesn't have shorts</h1>
@@ -84,9 +90,10 @@ export default function Channel(){
                     </>
                 }
                 {pageState==="details" &&
-                    <Suspense fallback="Loading...">
-                        <LazyAboutChannelShow ChnlsAbout={channelDetails} links={channelDetails?.links}/>
-                    </Suspense>
+                    // <Suspense fallback="Loading...">
+                    //     <LazyAboutChannelShow ChnlsAbout={channelDetails} links={channelDetails?.links}/>
+                    // </Suspense>
+                    <AboutChannelShow ChnlsAbout={channelDetails} links={channelDetails?.links}/>
                 }
             </div>
         </div>

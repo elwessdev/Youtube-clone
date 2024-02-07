@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function AboutChannelShow({ChnlsAbout,links}){
     return(
@@ -23,7 +24,7 @@ export default function AboutChannelShow({ChnlsAbout,links}){
                                         {link.name==="Instagram"&&
                                             <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcRT7bLbs25kzRtg95XuqrP5BcIN_09v9NhchUsyUvmHepVLvHkha5XVvy8IcGVGk19j0hxDOh9RoZvbi4RDc4BdVP6ZD3vVSUqF5v7jnLM_tlk"} alt='' />
                                         }
-                                        {link.name==="Tik Tok"&&
+                                        {(link.name==="Tik Tok"||link.name==="TikTok"||link.name==="tiktok")&&
                                             <img src={"https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcSEII2IIRImodcWZgz02fSWMJAoch4dG8QOVwhrtt_QvRi6NJLy8IjW1yAqU5ugCsqWjUeYJzz8ETnsSGPCArXzGmknKGS3PlAQHOi_1GEZqoL3vw"} alt='' />
                                         }
                                         {link.name==="Github"&&
