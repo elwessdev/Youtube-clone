@@ -9,48 +9,62 @@ export default function AboutChannelShow({ChnlsAbout,links}){
                     <p>{ChnlsAbout?.description}</p>
                 </div>
                 <div className='itm links'>
-                    <h1>Links</h1>
-                    <ul>
-                        {
-                            links?.map(link=>(
-                                <li>
-                                    <div className='icon'>
-                                        {link.name==="Twitter"&&
-                                            <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcSMLzaESE-7RnOgJ6LhhrvrNd5nmGpbBtUd_08WpBb9-QGf_o5Kb-EiQSTksKF4yP0CyeOexQL0WB1RxwW6Q2BfTG0oxJAEV49DcQyVyLqT"} alt='' />
-                                        }
-                                        {link.name==="Facebook"&&
-                                            <img src={"https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcTGBThtZ-3e21djNDYMEh7ecp-JqeMBC5-o9mBec1HzjZAwnKNWY9rCUanbOzMk5FoecrAJJh4CYmn8W_oqdZ_qlqB9cEDL7CONa4kfiwL1nA"} alt='' />
-                                        }
-                                        {link.name==="Instagram"&&
-                                            <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcRT7bLbs25kzRtg95XuqrP5BcIN_09v9NhchUsyUvmHepVLvHkha5XVvy8IcGVGk19j0hxDOh9RoZvbi4RDc4BdVP6ZD3vVSUqF5v7jnLM_tlk"} alt='' />
-                                        }
-                                        {(link.name==="Tik Tok"||link.name==="TikTok"||link.name==="tiktok")&&
-                                            <img src={"https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcSEII2IIRImodcWZgz02fSWMJAoch4dG8QOVwhrtt_QvRi6NJLy8IjW1yAqU5ugCsqWjUeYJzz8ETnsSGPCArXzGmknKGS3PlAQHOi_1GEZqoL3vw"} alt='' />
-                                        }
-                                        {link.name==="Github"&&
-                                            <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcT3siRwkYV0yRj-xMKfWr5a4owVUTWVEfHcA2IqqkYk1jOEZG6VR5j7hS6M1SAFDiHj-FAckilaVk26SQIwNWkIiJFNydpPKej965VlPVn2"} alt='' />
-                                        }
-                                        {link.name==="Discord"&&
-                                            <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcR3G7BpH5te5R8U-zHguWxGj6GBmWdLbw1F8f2QzSjJpHB6T9vPxs0US_XI9rAIKDUT0CC_lrZNNgyd6Eg299PrOTJ78whVf9KDppMz8thiRg"} alt='' />
-                                        }
-                                        {link.name==="Soundcloud"&&
-                                            <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcRH5-Y7oTiNSy6jTSmys-ip5rO6al2iOp5Fwdw5LzidxnVRSkePdmkEcaUVeN0fBg83XsB37qvdfoCPToFzmlDcHWWPmXRKhIlDgudapS7TNDDi_g"} alt='' />
-                                        }
-                                        {link.name==="Spotify"&&
-                                            <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcQHjC-mUGPRkOqUnk48kCPPHQQFsypPXs-iQvPm-hWGWXarJ6vBlCovAJp0ShS1b2NSFh5Ow-jdA8sUUqv7-M4MgU3BvypRZofykWP7Ind_arBlcZ4"} alt='' />
-                                        }
-                                        {link.name==="Apple Music"&&
-                                            <img src={"https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcQPyKPPX7s1yPGte5LskwxoVwjNLDNbAF-MKmj0jCdYqAPjYvxZZ5sPcwjEm9fLzu4gpT5mNZc_4R76xPF8vNOtSNnuPHpa06Y4fkhtinzEUYCkl0U"} alt='' />
-                                        }
-                                    </div>
-                                    <div className='in'>
-                                        <p>{link?.name}</p>
-                                        <a href={link?.endpoint}>{link?.endpoint}</a>
-                                    </div>
-                                </li>
-                            ))
-                        }
-                    </ul>
+                    {(links?.length!==0)&&(
+                        <>
+                            <h1>Links</h1>
+                            <ul>
+                                {
+                                    links?.map(link=>(
+                                        <li>
+                                            <div className='icon'>
+                                                {link?.endpoint.includes("twitter.com")&&
+                                                    <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcSMLzaESE-7RnOgJ6LhhrvrNd5nmGpbBtUd_08WpBb9-QGf_o5Kb-EiQSTksKF4yP0CyeOexQL0WB1RxwW6Q2BfTG0oxJAEV49DcQyVyLqT"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("facebook.com")&&
+                                                    <img src={"https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcTGBThtZ-3e21djNDYMEh7ecp-JqeMBC5-o9mBec1HzjZAwnKNWY9rCUanbOzMk5FoecrAJJh4CYmn8W_oqdZ_qlqB9cEDL7CONa4kfiwL1nA"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("instagram.com")&&
+                                                    <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcRT7bLbs25kzRtg95XuqrP5BcIN_09v9NhchUsyUvmHepVLvHkha5XVvy8IcGVGk19j0hxDOh9RoZvbi4RDc4BdVP6ZD3vVSUqF5v7jnLM_tlk"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("tiktok.com")&&
+                                                    <img src={"https://encrypted-tbn3.gstatic.com/favicon-tbn?q=tbn:ANd9GcSEII2IIRImodcWZgz02fSWMJAoch4dG8QOVwhrtt_QvRi6NJLy8IjW1yAqU5ugCsqWjUeYJzz8ETnsSGPCArXzGmknKGS3PlAQHOi_1GEZqoL3vw"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("github")&&
+                                                    <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcT3siRwkYV0yRj-xMKfWr5a4owVUTWVEfHcA2IqqkYk1jOEZG6VR5j7hS6M1SAFDiHj-FAckilaVk26SQIwNWkIiJFNydpPKej965VlPVn2"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("discord")&&
+                                                    <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcR3G7BpH5te5R8U-zHguWxGj6GBmWdLbw1F8f2QzSjJpHB6T9vPxs0US_XI9rAIKDUT0CC_lrZNNgyd6Eg299PrOTJ78whVf9KDppMz8thiRg"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("soundcloud")&&
+                                                    <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcRH5-Y7oTiNSy6jTSmys-ip5rO6al2iOp5Fwdw5LzidxnVRSkePdmkEcaUVeN0fBg83XsB37qvdfoCPToFzmlDcHWWPmXRKhIlDgudapS7TNDDi_g"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("spotify")&&
+                                                    <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcQHjC-mUGPRkOqUnk48kCPPHQQFsypPXs-iQvPm-hWGWXarJ6vBlCovAJp0ShS1b2NSFh5Ow-jdA8sUUqv7-M4MgU3BvypRZofykWP7Ind_arBlcZ4"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("music.apple")&&
+                                                    <img src={"https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcQPyKPPX7s1yPGte5LskwxoVwjNLDNbAF-MKmj0jCdYqAPjYvxZZ5sPcwjEm9fLzu4gpT5mNZc_4R76xPF8vNOtSNnuPHpa06Y4fkhtinzEUYCkl0U"} alt='' />
+                                                }
+                                                {link?.endpoint.includes("youtube")&&
+                                                    <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcS1vwASPxBx8pWcsxOdZW6EO3ShZGo4B4BNw9qTKO5IMiWK2GPw1iynUWbD-8TDtj_OdWs0duRvncHJCAN9cVBFSrVQWPnHbyIP1avBGJMm"} alt='' />
+                                                }
+                                                {link?.name.includes("Website")&&
+                                                    <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQZ0ODfyKp2Xe5kqfM4UB3BNOBoCpWzmgol0Jyurqg-2bQ0getFrg2JMsO3wo7ohuMHKJkKLGtUH27IN-JWJLPrj14H-AcG_YVu4Iu83g4HzQ"} alt='' />
+                                                }
+                                                {(!link?.endpoint.includes("facebook.com")&&!link?.endpoint.includes("twitter.com")&&!link?.endpoint.includes("tiktok.com")&&!link?.endpoint.includes("instagram.com")&&!link?.endpoint.includes("github")&&!link?.endpoint.includes("discord")&&!link?.endpoint.includes("soundcloud")&&!link?.endpoint.includes("spotify")&&!link?.endpoint.includes("music.apple")&&!link?.endpoint.includes("youtube")&&!link?.endpoint.includes("Website"))&&
+                                                    <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQZ0ODfyKp2Xe5kqfM4UB3BNOBoCpWzmgol0Jyurqg-2bQ0getFrg2JMsO3wo7ohuMHKJkKLGtUH27IN-JWJLPrj14H-AcG_YVu4Iu83g4HzQ"} alt='' />
+                                                }
+                                            </div>
+                                            <div className='in'>
+                                                <p>{link?.name}</p>
+                                                <a href={link?.endpoint}>{link?.endpoint}</a>
+                                            </div>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </>
+                    )}
+                    
                 </div>
                 <div className='itm det'>
                     <h1>Channel details</h1>
