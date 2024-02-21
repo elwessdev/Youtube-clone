@@ -32,9 +32,9 @@ export default function Video(){
         try{
             const resp = await axios.request(options);
             setVideoDetails(resp.data);
-            console.log("video details:", resp.data)
+            // console.log("video details:", resp.data);
         } catch(error){
-            console.log("video details:", error)
+            // console.log("video details:", error);
         }
     }
     useEffect(()=>{

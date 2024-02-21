@@ -17,7 +17,7 @@ export default function TopSection({chanID}){
         try {
             const resp = await axios.request(options);
             setChannelDetails(resp.data);
-            console.log("Channel Details",resp.data)
+            // console.log("Channel Details",resp.data)
         } catch (error) {
             console.error(error);
         }

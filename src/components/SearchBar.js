@@ -24,9 +24,9 @@ export default function SearchBar(){
         try{
             const resp = await axios.request(options);
             setRearchResults(resp.data.results);
-            console.log(resp.data.results);
+            // console.log(resp.data.results);
         } catch(error){
-            console.log(error)
+            // console.log(error)
         }
     }
     return(

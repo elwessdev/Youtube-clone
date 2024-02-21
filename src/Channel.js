@@ -40,13 +40,13 @@ export default function Channel(){
             const resp = await axios.request(options);
             if(pageState==="videos"){
                 setChannelVids(resp.data.videos);
-                console.log(pageState, resp.data.videos);
+                // console.log(pageState, resp.data.videos);
             } else if(pageState==="shorts"){
                 setChannelShorts(resp.data.videos);
-                console.log(pageState, resp.data.videos);
+                // console.log(pageState, resp.data.videos);
             } else if(pageState==="details") {
                 setChannelDetails(resp.data);
-                console.log(pageState, resp.data);
+                // console.log(pageState, resp.data);
             }
         } catch (error) {
             console.error(error);

@@ -9,7 +9,7 @@ import SearchContent from "./components/Search/SearchContent";
 export default function Search(){
     const params = useParams();
     const qTxt = params.qTxt;
-    console.log("search:",qTxt)
+    // console.log("search:",qTxt)
     return(
         <div className='search-page'>
             <SearchBar />

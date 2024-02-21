@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 export default function AboutChannelShow({ChnlsAbout,links}){
     return(
         <div className='about-part'>
-                <div className='itm'>
-                    <h1>About</h1>
-                    <p>{ChnlsAbout?.description}</p>
-                </div>
+                {(ChnlsAbout?.description!=="\n")&&(
+                    <div className='itm'>
+                        <h1>About</h1>
+                        <p>{ChnlsAbout?.description}</p>
+                    </div>
+                )}
                 <div className='itm links'>
                     {(links?.length!==0)&&(
                         <>
@@ -20,7 +22,7 @@ export default function AboutChannelShow({ChnlsAbout,links}){
                                                 {link?.endpoint.includes("twitter.com")&&
                                                     <img src={"https://encrypted-tbn1.gstatic.com/favicon-tbn?q=tbn:ANd9GcSMLzaESE-7RnOgJ6LhhrvrNd5nmGpbBtUd_08WpBb9-QGf_o5Kb-EiQSTksKF4yP0CyeOexQL0WB1RxwW6Q2BfTG0oxJAEV49DcQyVyLqT"} alt='' />
                                                 }
-                                                {link?.endpoint.includes("facebook.com")&&
+                                                {(link?.endpoint.includes("facebook.com")||link?.endpoint.includes("fb.me"))&&
                                                     <img src={"https://encrypted-tbn2.gstatic.com/favicon-tbn?q=tbn:ANd9GcTGBThtZ-3e21djNDYMEh7ecp-JqeMBC5-o9mBec1HzjZAwnKNWY9rCUanbOzMk5FoecrAJJh4CYmn8W_oqdZ_qlqB9cEDL7CONa4kfiwL1nA"} alt='' />
                                                 }
                                                 {link?.endpoint.includes("instagram.com")&&
@@ -50,7 +52,7 @@ export default function AboutChannelShow({ChnlsAbout,links}){
                                                 {link?.name.includes("Website")&&
                                                     <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQZ0ODfyKp2Xe5kqfM4UB3BNOBoCpWzmgol0Jyurqg-2bQ0getFrg2JMsO3wo7ohuMHKJkKLGtUH27IN-JWJLPrj14H-AcG_YVu4Iu83g4HzQ"} alt='' />
                                                 }
-                                                {(!link?.endpoint.includes("facebook.com")&&!link?.endpoint.includes("twitter.com")&&!link?.endpoint.includes("tiktok.com")&&!link?.endpoint.includes("instagram.com")&&!link?.endpoint.includes("github")&&!link?.endpoint.includes("discord")&&!link?.endpoint.includes("soundcloud")&&!link?.endpoint.includes("spotify")&&!link?.endpoint.includes("music.apple")&&!link?.endpoint.includes("youtube")&&!link?.endpoint.includes("Website"))&&
+                                                {(!link?.endpoint.includes("facebook.com")&&!link?.endpoint.includes("twitter.com")&&!link?.endpoint.includes("tiktok.com")&&!link?.endpoint.includes("instagram.com")&&!link?.endpoint.includes("github")&&!link?.endpoint.includes("discord")&&!link?.endpoint.includes("soundcloud")&&!link?.endpoint.includes("spotify")&&!link?.endpoint.includes("music.apple")&&!link?.endpoint.includes("youtube")&&!link?.endpoint.includes("Website")&&!link?.endpoint.includes("fb.me"))&&
                                                     <img src={"https://encrypted-tbn0.gstatic.com/favicon-tbn?q=tbn:ANd9GcQZ0ODfyKp2Xe5kqfM4UB3BNOBoCpWzmgol0Jyurqg-2bQ0getFrg2JMsO3wo7ohuMHKJkKLGtUH27IN-JWJLPrj14H-AcG_YVu4Iu83g4HzQ"} alt='' />
                                                 }
                                             </div>
