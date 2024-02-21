@@ -31,7 +31,7 @@ export default function Channel(){
         url: `https://youtube-v2.p.rapidapi.com/channel/${pageState}`,
         params: {channel_id: channelId},
         headers: {
-            'X-RapidAPI-Key': '04b6b0772dmshae4740c9ae2ed0ep1252a1jsn7423468181f9',
+            'X-RapidAPI-Key': '87b93ad1bemshde292e3554a25dfp1f5e5ejsn73b7a78f7e8e',
             'X-RapidAPI-Host': 'youtube-v2.p.rapidapi.com'
         }
     };

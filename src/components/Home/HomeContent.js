@@ -20,10 +20,10 @@ export default function HomeContent({page}){
     useEffect(()=>{
         if(page==="trending"){
             fetchData("trending").then(data=>setTrendVidsList(data.data));
-            // console.log('Home trending', vids)
+            console.log('Home trending', vids)
         } else {
             fetchData(`search?query=${page}`).then(data=>setVids(data.data)).catch(err=>{
-                // console.log(err)
+                console.log(err)
             });
             // console.log('Home vids', vids)
         }
